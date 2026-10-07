@@ -54,3 +54,19 @@ VLESS-профиль удалите.
 откройте VLESS-инбаунд и смените Security с `none` на `reality`
 (нажмите «Get New Cert»/сгенерировать ключи), сохраните и заново выдайте
 ссылку клиенту.
+
+## Вариант 2: как было (VLESS gRPC без TLS) + VLESS Encryption
+
+Если REALITY не проходит у вашего провайдера, а старый VLESS gRPC без TLS работал,
+`enable-vless-encryption.sh` возвращает исходный конфиг (из самой старой
+резервной копии) и включает в нём VLESS Encryption — именно его требует Happ 6.x.
+
+Из PowerShell на компьютере (не на сервере):
+
+```powershell
+ssh root@87.199.209.117 "curl -fsSL https://raw.githubusercontent.com/falobibich/project/claude/github-quota-100-a0fwds/enable-vless-encryption.sh -o /root/enable-vless-encryption.sh && bash /root/enable-vless-encryption.sh"
+ssh root@87.199.209.117 "cat /root/vless-encryption-link.txt" | Set-Clipboard
+```
+
+Вторая команда кладёт ссылку сразу в буфер обмена — дальше Happ → «+» →
+«Импорт из буфера».
